@@ -5,6 +5,12 @@ const multer = require('multer');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const cors = require('cors')
+const fs = require('fs');
+// Check if the images folder exists
+if (!fs.existsSync('images')) {
+  // If the images folder doesn't exist, create it
+  fs.mkdirSync('images');
+}
 // Initialize Express and set up the port
 const app = express();
 const port = 3000;
@@ -96,18 +102,6 @@ db.get('SELECT COUNT(*) as count FROM sqlite_master WHERE type="table" AND name=
           console.error(err.message);
         } else {
           console.log('User table created.');
-
-          // Insert user into the User table
-          db.run(`
-              INSERT INTO User (email, firstName, lastName, password, person_id)
-              VALUES (?, ?, ?, ?, ?)
-            `, ['user@user.com', 'User', 'User', '12345678', 1], function (err) {
-            if (err) {
-              console.error(err.message);
-            } else {
-              console.log('User added.');
-            }
-          });
         }
       });
     }
@@ -140,35 +134,6 @@ db.get('SELECT COUNT(*) as count FROM sqlite_master WHERE type="table" AND name=
         } else {
           console.log('Person table created.');
 
-          // Insert persons into the Person table
-          db.run(`
-              INSERT INTO Person (firstName, lastName, gender, birthyear, living, public, family_id, partner_id, image)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?),
-                     (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            `, ['Mr.', 'A', 'Male', '1950', 1, 1, 1, 2, 'default.jpeg',
-            'Mrs', 'B', 'Female', '1952', 1, 1, 1, 1, 'default.jpeg',
-            'Mike', 'Wazowski', 'Male', '1975', 1, 1, 1, 4, 'default.jpeg',
-            'James', 'Sullivan', 'Male', '1977', 1, 1, 1, 3, 'default.jpeg',
-            'Child1', 'C1', 'Male', '2000', 1, 1, 1, null, 'default.jpeg',
-            'Child2', 'C2', 'Female', '2002', 1, 1, 1, null, 'default.jpeg',
-            'Stranger', 'stranger', 'Male', '1940', 1, 1, 1, null, 'default.jpeg',
-            'Mr.', 'A jr', 'Male', '1976', 1, 1, 1, null, 'default.jpeg',
-            'Stranger', 'Kid', 'Male', '1977', 1, 1, 1, null, 'default.jpeg'
-          ],
-            function (err) {
-              if (err) {
-                console.error(err.message);
-              } else {
-                console.log('Persons added.');
-              }
-            });
         }
       });
     }
@@ -186,25 +151,6 @@ CREATE TABLE IF NOT EXISTS Family (
     } else {
       console.log('Family table created.');
 
-      // Check if there are any rows in the Family table
-      db.get('SELECT COUNT(*) as count FROM Family', (err, row) => {
-        if (err) {
-          console.error(err.message);
-        } else {
-          // If there are no rows, insert a new row
-          if (row.count === 0) {
-            db.run(`
-          INSERT INTO Family (name) VALUES ("Mr. A's Family")
-          `, (err) => {
-              if (err) {
-                console.error(err.message);
-              } else {
-                console.log('Empty row added to Family table.');
-              }
-            });
-          }
-        }
-      });
 
     }
   });
@@ -229,32 +175,6 @@ CREATE TABLE IF NOT EXISTS Family (
           } else {
             console.log('Parent table created.');
 
-            // Insert parent-child relationships into the Parent table
-            db.run(`
-              INSERT INTO Parent (parent_id, child_id, family_id)
-              VALUES (?, ?, ?),
-                     (?, ?, ?),
-                     (?, ?, ?),
-                     (?, ?, ?),
-                     (?, ?, ?),
-                     (?, ?, ?),
-                     (?, ?, ?),
-                     (?, ?, ?)
-            `, [1, 3, 1,
-              2, 3, 1,
-              3, 5, 1,
-              3, 6, 1,
-              4, 5, 1,
-              4, 6, 1,
-              1, 8, 1,
-              7, 9, 1],
-              function (err) {
-                if (err) {
-                  console.error(err.message);
-                } else {
-                  console.log('Parent-child relationships added.');
-                }
-              });
           }
         });
       }
@@ -264,32 +184,6 @@ CREATE TABLE IF NOT EXISTS Family (
 
 });
 
-// Log the details of the Person table
-db.all('SELECT * FROM Person', (err, rows) => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    console.log('Person table details:', rows);
-  }
-});
-
-// Log the details of the Family table
-db.all('SELECT * FROM Family', (err, rows) => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    console.log('Family table details:', rows);
-  }
-});
-
-// Log the details of the Parent table
-db.all('SELECT * FROM Parent', (err, rows) => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    console.log('Parent table details:', rows);
-  }
-});
 // Users routes
 app.get('/api/users', (req, res) => {
   db.all('SELECT * FROM User', (err, rows) => {
