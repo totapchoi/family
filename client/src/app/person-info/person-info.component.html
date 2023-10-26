@@ -1,0 +1,35 @@
+<div class="container">
+    <mat-card class="profile-card">
+        <img mat-card-image class="profile-image" [src]="imageUrl" alt="Profile Image">
+        <mat-card-content>
+            <mat-card-title class="profile-name">
+                {{person?.firstName}} {{person?.lastName}} {{person?.birthyear}}
+                <span class="edit" *ngIf="isAuthorize()" (click)="editPerson()">Edit <i
+                        class="fas fa-pencil-alt"></i></span>
+            </mat-card-title>
+            <mat-card-title>Parents</mat-card-title>
+            <div class="parent" *ngIf="parents">
+                <ul>
+                    <li *ngFor="let parent of parents" (click)="navigate(parent.id)">{{parent.firstName}} {{parent.lastName}}</li>
+                </ul>
+            </div>
+            <mat-card-title>Children</mat-card-title>
+            <button class="btn btn-primary" [disabled]="!(isAuthorize())" (click)="addChildren()">Add Chilren</button>
+            <div class="children" *ngIf="children">
+                <ul>
+                    <li *ngFor="let child of children" (click)="navigate(child.id)" >{{child.firstName}} {{child.lastName}}</li>
+                </ul>
+            </div>
+            <mat-card-title *ngIf="partner">Partner</mat-card-title>
+            <div>
+                <ul>
+                    <li *ngIf="partner" (click)="navigate(partner.id)">{{partner.firstName}} {{partner.lastName}}</li>
+                </ul>
+            </div>
+            <button class="btn btn-primary" (click)="gotoTree()">Go to tree</button>
+            <button class="btn btn-primary" (click)="signout()">Sign out</button>
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

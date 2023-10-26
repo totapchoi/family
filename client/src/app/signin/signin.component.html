@@ -1,0 +1,33 @@
+<div class="container">
+    <h2 class="text-center font-weight-bold mb-5">Sign In</h2>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="mx-auto" style="max-width: 400px;">
+      <!-- Email input -->
+      <div class="form-group">
+        <label for="email">Email <span class="text-danger">*</span></label>
+        <input type="email" id="email" formControlName="email" class="form-control input-icon" required>
+        <div class="error-container">
+          <small *ngIf="signinForm.controls['email'].invalid && signinForm.controls['email'].touched" class="form-text text-danger">
+            This is an invalid email
+          </small>
+        </div>
+      </div>
+      <!-- Password input -->
+      <div class="form-group">
+        <label for="password">Password <span class="text-danger">*</span></label>
+        <input type="password" id="password" formControlName="password" class="form-control" required>
+        <div class="error-container">
+          <small *ngIf="signinForm.controls['password'].invalid && signinForm.controls['password'].touched" class="form-text text-danger">
+            Password must be at least 8 characters.
+          </small>
+        </div>
+      </div>
+      <!-- Error message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+        Error: Email or password not found
+      </div>
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary" [disabled]="!signinForm.valid">Sign In</button>
+        <button (click)="gotoSignup()" class="btn btn-secondary">Go to Sign Up</button>
+      </div>
+    </form>
+  </div>

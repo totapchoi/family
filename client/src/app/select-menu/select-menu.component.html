@@ -1,0 +1,5 @@
+<div  (click)="stopPropagation($event)">
+  <ul>
+    <li *ngFor="let option of options" (click)="onSelect(option)" [ngClass]="{'disabled': disableCondition(option)}">{{option}}</li>
+  </ul>
+</div>

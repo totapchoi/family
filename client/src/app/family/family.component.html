@@ -1,0 +1,48 @@
+<div>
+  <h1 class="title" >{{title.toUpperCase()}} <i *ngIf="isAuthorize()" class="fas fa-pencil-alt edit" (click)="editFamilyName($event)"></i></h1>
+</div>
+<div class="family-tree">
+  <ng-template #recursiveNode let-node let-level="level">
+    <div class="node-wrapper">
+      <div class="node">
+        <div class="person" (click)="selectNode($event, node)">
+          <img [src]="node.gender === 'Male' ? 'assets/defaultmale.png' : 'assets/defaultfemale.png'" alt="Logo"
+            class="logo">
+          <div class="name">{{ node.firstname }} {{ node.lastname }} <br> {{ node.birthyear}} - {{node.living}}</div>
+        </div>
+        <hr>
+        <div *ngIf="node.partner">
+          <div class="person" (click)="selectPartner($event,node)">
+            <img [src]="node.partner.gender === 'Male' ? 'assets/defaultmale.png' : 'assets/defaultfemale.png'"
+              alt="Logo" class="logo">
+            <div class="name">{{ node.partner.firstname }} {{ node.partner.lastname }}<br> {{ node.partner.birthyear}} -
+              {{node.partner.living}}</div>
+          </div>
+        </div>
+        <div *ngIf="!(node.partner)">
+          <div class="person" (click)="handleOptionSelected('Add Partner',node)">
+            <img src="assets/defaultfemale.png" alt="Logo" class="logo">
+            <div class="name">Add a partner </div>
+          </div>
+        </div>
+      </div>
+      <app-select-menu class="app-select-menu" *ngIf="selectedNode === node" [options]="menuOptions"
+        (optionSelected)="handleOptionSelected($event,node)" (clickedOutside)="selectedNode = null"
+        [ngClass]="{'app-select-menu': (selectedId == node.id), 'app-select-partner': !(selectedId == node.id)}"
+        [disableCondition]="shouldDisableOption(node)">
+      </app-select-menu>
+
+      <div class="children" *ngIf="node.children && node.children.length > 0">
+        <div class="children-wrapper">
+          <ng-container *ngFor="let child of node.children; let i = index">
+            <ng-container
+              *ngTemplateOutlet="recursiveNode; context: { $implicit: child, level: level + '-' + i }"></ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-container *ngFor="let node of familyTree; let i = index">
+    <ng-container *ngTemplateOutlet="recursiveNode; context: { $implicit: node, level: i }"></ng-container>
+  </ng-container>
+</div>

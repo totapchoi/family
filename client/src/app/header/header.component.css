@@ -1,0 +1,31 @@
+.header-container {
+    
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    
+  }
+  
+  nav li {
+    margin-left: 1rem;
+    
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+  }
+
+  
+
+  
+ 

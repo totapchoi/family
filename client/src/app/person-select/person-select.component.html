@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="person-select">
+    <div class="input-chip">
+      <input class="input-field" type="text" [(ngModel)]="value" (ngModelChange)="filterPerson($event)"
+        [placeholder]="selectedPerson ? '' : 'Search Persons...'" [disabled]="selectedPerson">
+      <mat-icon class="down-arrow" matSuffix (click)="toggleDropdown()">keyboard_arrow_down</mat-icon>
+      <mat-chip-listbox #chipList>
+        <mat-chip-option *ngIf="selectedPerson">
+          {{getSelectedPersonProperties()}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+    <div class="dropdown" *ngIf="showDropdown && value">
+      <div class="searchOption" *ngFor="let person of filteredPersons" (click)="selectPerson(person)">
+        <span *ngFor="let property of displayProperties">
+          {{person[property]}}&nbsp;
+        </span>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

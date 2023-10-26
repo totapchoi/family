@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+  }
+  .edit {
+    color: blue; 
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .profile-card {
+    width: 40%;  
+    max-width: 800px;  
+  }
+  
+  .profile-image {
+    width: 100%;
+    
+  }
+  
+  .profile-name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .profile-info {
+    font-size: 16px;
+  }
+  li {
+    margin-bottom: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  button{
+    margin-right: 5px;
+  }

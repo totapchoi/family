@@ -1,0 +1,62 @@
+<div class="container">
+    <h2 class="text-center font-weight-bold mb-5">Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="mx-auto" style="max-width: 400px;">
+      <!-- Email input -->
+      <div class="form-group">
+        <label for="email">Email <span class="text-danger">*</span></label>
+        <input type="email" id="email" formControlName="email" class="form-control input-icon" required>
+        <div class="error-container">
+          <small *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched" class="form-text text-danger">
+            This is an invalid email
+          </small>
+        </div>
+      </div>
+      <!-- First name input -->
+      <div class="form-group">
+        <label for="firstName">First Name <span class="text-danger">*</span></label>
+        <input type="text" id="firstName" formControlName="firstName" class="form-control" required>
+        <div class="error-container">
+          <small *ngIf="signupForm.controls['firstName'].invalid && signupForm.controls['firstName'].touched" class="form-text text-danger">
+            You must enter your first name
+          </small>
+        </div>
+      </div>
+      <!-- Last name input -->
+      <div class="form-group">
+        <label for="lastName">Last Name <span class="text-danger">*</span></label>
+        <input type="text" id="lastName" formControlName="lastName" class="form-control" required>
+        <div class="error-container">
+          <small *ngIf="signupForm.controls['lastName'].invalid && signupForm.controls['lastName'].touched" class="form-text text-danger">
+            You must enter your last name
+          </small>
+        </div>
+      </div>
+      <!-- Password input -->
+      <div class="form-group">
+        <label for="password">Password <span class="text-danger">*</span></label>
+        <input type="password" id="password" formControlName="password" class="form-control" required>
+        <div class="error-container">
+          <small *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched" class="form-text text-danger">
+            Password must be at least 8 characters.
+          </small>
+        </div>
+      </div>
+      <!-- Repassword input -->
+      <div class="form-group">
+        <label for="repassword">Re-enter Password <span class="text-danger">*</span></label>
+        <input type="password" id="repassword" formControlName="repassword" class="form-control" required>
+        <div class="error-container">
+          <small *ngIf="signupForm.controls['repassword'].invalid && signupForm.controls['repassword'].touched" class="form-text text-danger">
+            Repassword must match password
+          </small>
+        </div>
+      </div>
+      <!-- Submit button -->
+    <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
+
+
+  
+  
+    </form>
+    
+  </div>

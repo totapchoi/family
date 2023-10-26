@@ -1,0 +1,6 @@
+<app-person-select class = "app-person-select"
+								 [displayProperties]="['firstName', 'lastName','id']"
+								 [persons]="persons"
+					      		 (search)="searchPersons($event)"
+								 (personSelected)="selectPerson($event)">
+</app-person-select>

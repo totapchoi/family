@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.input-field {
+    width:500px;
+    height: 40px; 
+    
+}
+.dropdown {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1); /* This creates an outline */
+}
+
+.searchOption {
+    margin: 1rem 0; 
+    font-size: 1rem; 
+    line-height: 2rem; 
+}
+
+.searchOption:hover{
+    background-color: blue;
+    color: white;
+}
+
+
+  

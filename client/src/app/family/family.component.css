@@ -1,0 +1,77 @@
+.title{
+  text-align: center;
+}
+.edit {
+    color: blue; 
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.family-tree {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  }
+  
+  .node {
+    border: 2px solid gray;
+    padding: 10px;
+    margin: 10px;
+    width: 120px;
+   
+    
+  }
+  .person :hover{
+    background-color: lightblue;
+    cursor: pointer;
+  }
+  .node-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 1;
+    flex-grow: 1
+  }
+  
+  .children {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  
+  .children-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .person {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 10px; 
+  }
+  
+  .name {
+    font-weight: bold;
+    font-size: 10px; 
+  }
+  .app-select-menu {
+    position: absolute;
+    top: 5%;
+    right: 50%;
+    z-index: 1;
+  }
+  .app-select-partner{
+    position: absolute;
+    top: 20%;
+    right: 50%;
+    z-index: 1;
+  }

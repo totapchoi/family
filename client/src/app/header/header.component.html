@@ -1,0 +1,30 @@
+<div class="header-container">
+  <div class = "left-menu">
+  <nav>
+    <ul class>
+      <ng-container *ngFor="let menu of menus">
+        <li >
+          <ng-container *ngIf="menu.align === 'left'">
+            <a [routerLink]="menu.url">{{menu.text}}</a>
+          </ng-container>
+        </li>
+      </ng-container>
+    </ul>
+  </nav>
+  </div>
+
+<div class="right-menu">
+  <nav>
+    <ul>
+      <ng-container *ngFor="let menu of menus">
+        <li>
+          <ng-container *ngIf="menu.align === 'right'">
+            <a [routerLink]="menu.url">{{menu.text}}</a>
+          </ng-container>
+        </li>
+      </ng-container>
+    </ul>
+  </nav>
+</div>
+</div>
+<hr>
