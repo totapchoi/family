@@ -10,8 +10,6 @@ import { PersonService } from './person.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // confirmationMessage = 'Are you sure you want to proceed?';
-  // showDialog = false;
   constructor(public authService: AuthService, public userService: UserService, public personService: PersonService) { }
   menus = [
     { url: '/', text: 'Home', align: 'left' },
@@ -35,6 +33,7 @@ export class AppComponent {
   }
   signout() {
     this.authService.removeToken()
+    window.location.reload()
   }
  
 }

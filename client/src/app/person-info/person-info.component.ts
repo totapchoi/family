@@ -82,14 +82,17 @@ export class PersonInfoComponent implements OnInit{
   .then(() => {
     window.location.reload();
   });
-
+  
+  }
+  navigateTree(){
+    this.router.navigate(['/family'])
   }
   isAuthorize() : boolean {
     return this.person?.id === this.currentPerson?.id;
   }
   signout(){
     this.authService.removeToken();
-    this.router.navigate(['/home'], { queryParams: { reload: true } });
+    window.location.reload();
   }
  
 }

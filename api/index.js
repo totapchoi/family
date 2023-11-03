@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const jwt = require('jsonwebtoken');
-const cors = require('cors')
 const fs = require('fs');
 // Check if the images folder exists
 if (!fs.existsSync('images')) {
@@ -33,7 +32,6 @@ const key = 'LDKLADKFLJDF';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors());
 
 // Serve static files from the 'images' folder
 app.use('/api/images', express.static(path.join(__dirname, 'images')));
@@ -41,7 +39,7 @@ app.use('/api/images', express.static(path.join(__dirname, 'images')));
 
 // Define authentication middleware
 function authMiddleware(req, res, next) {
-  if (req.path === '/api/auth/signin' || req.path === '/api/signup') {
+  if (req.path === '/api/auth/signin' || req.path === '/api/signup' || req.path == '/api/person/search'){
     return next();
   }
 
@@ -113,10 +111,10 @@ db.get('SELECT COUNT(*) as count FROM sqlite_master WHERE type="table" AND name=
   if (err) {
     console.error(err.message);
   } else {
-    // If table does not exist, create table and add persons
-    if (row.count === 0) {
+
+    
       db.run(`
-        CREATE TABLE Person (
+        CREATE TABLE IF NOT EXISTs Person (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         firstName TEXT,
         lastName TEXT,
@@ -136,7 +134,7 @@ db.get('SELECT COUNT(*) as count FROM sqlite_master WHERE type="table" AND name=
 
         }
       });
-    }
+    
   }
 
   // Create the Family table

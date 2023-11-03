@@ -5,5 +5,8 @@ client/node_modules/
 # Ignore database file
 api/database.db
 
+#Ignore image folder
+api/images
+
 # Ignore the dist folder in the client directory
 client/dist/

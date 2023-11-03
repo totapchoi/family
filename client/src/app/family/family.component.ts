@@ -104,6 +104,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
   handleOptionSelected(option: string, node: Node) {
     if (option == 'Go to info page'){
       this.router.navigate(['/person/' + this.selectedId])
+      return;
     }
     if (this.isAuthorize()) {
       this.selectedNode = null;

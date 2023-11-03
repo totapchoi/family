@@ -14,7 +14,8 @@
                 </ul>
             </div>
             <mat-card-title>Children</mat-card-title>
-            <button class="btn btn-primary" [disabled]="!(isAuthorize())" (click)="addChildren()">Add Chilren</button>
+            <button *ngIf="!(person?.family_id) && (isAuthorize())" class="btn btn-primary" (click)="navigateTree()">Create Tree</button>
+            <button *ngIf="person?.family_id" class="btn btn-primary" [disabled]="!(isAuthorize())" (click)="addChildren()">Add Chilren</button>
             <div class="children" *ngIf="children">
                 <ul>
                     <li *ngFor="let child of children" (click)="navigate(child.id)" >{{child.firstName}} {{child.lastName}}</li>
@@ -26,8 +27,8 @@
                     <li *ngIf="partner" (click)="navigate(partner.id)">{{partner.firstName}} {{partner.lastName}}</li>
                 </ul>
             </div>
-            <button class="btn btn-primary" (click)="gotoTree()">Go to tree</button>
-            <button class="btn btn-primary" (click)="signout()">Sign out</button>
+            <button class="btn btn-primary" *ngIf="person?.family_id" (click)="gotoTree()">Go to tree</button>
+            <button *ngIf="isAuthorize()" class="btn btn-primary" (click)="signout()">Sign out</button>
         </mat-card-content>
 
     </mat-card>
